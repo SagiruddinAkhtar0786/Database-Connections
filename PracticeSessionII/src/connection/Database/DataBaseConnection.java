@@ -19,7 +19,7 @@ public class DataBaseConnection {
 
 			st = con.createStatement();
 			con.setAutoCommit(false);
-			int rows = st.executeUpdate("INSERT INTO EMPLOYEE(id,EmployeeeName,Email) VALUES(1,'sagir','srakhtar1997@gmail.com')");
+			int rows = st.executeUpdate("INSERT INTO EMPLOYEE(id,EmployeeeName,Email) VALUES(3,'rahim','abc@gmail.com')");
 			System.out.println(rows +"rows inserted successfully!!");
 			con.commit()
 ;		}catch(Exception e) {
