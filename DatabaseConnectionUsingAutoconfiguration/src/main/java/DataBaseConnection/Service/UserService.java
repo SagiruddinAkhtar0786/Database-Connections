@@ -21,4 +21,9 @@ public class UserService {
 		System.out.println(list.toString());
 		return list;
 	}
+	
+	public User createUser(User user) {
+		User singleuser = userRepo.save(user);
+		return singleuser;
+	}
 }
