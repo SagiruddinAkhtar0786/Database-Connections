@@ -28,7 +28,7 @@ public class JPAController {
 		return new ResponseEntity<>(users,HttpStatus.FOUND);
 	}
 	
-	@PostMapping("/CreateUser")
+	@PostMapping("/CreateUser") // used it for security credential check
 	public ResponseEntity<User> createUser(@RequestBody User user){
 		
 		User singleuser = userService.createUser(user);
