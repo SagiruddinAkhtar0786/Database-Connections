@@ -50,6 +50,20 @@ public class CRUD {
 		
 	}
 	
+	
+	@GetMapping("/fetchData")
+	public ResponseEntity<List<UserResponseDto>> fetchDataAll(){
+	//	List<UserDto> list = new ArrayList<>();
+		List<UserResponseDto> lst = UserService.fetchData();
+		
+		System.out.println(lst);
+		
+		return new ResponseEntity<>(lst,HttpStatus.OK);
+		
+		//return ResponseEntity.ok(UserService.fetchData());
+		
+	}
+	
 	/*@GetMapping("/users")
 	public ResponseEntity<List<UserDto>> fetchData() {
 		try(Connection con = datasource.getConnection();
