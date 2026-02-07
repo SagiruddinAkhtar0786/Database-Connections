@@ -41,7 +41,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
            if( jwtUtil.validateToken(username,userDetails,token)){
                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-               SecurityContextHolder.getContext().setAuthentication(authToken); // this tells the spring that user is authenticated
+               SecurityContextHolder.getContext().setAuthentication(authToken); // this tells the spring that user is authenticated before reaching the controller
            }
         }
         
