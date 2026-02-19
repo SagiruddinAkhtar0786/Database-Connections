@@ -21,41 +21,47 @@ import com.database.configuration.service.CustomUserDetailsService;
 @EnableWebSecurity
 public class Config {
 	@Autowired
-    JwtAuthFilter jwtAuthFilter;
-    @Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+	JwtAuthFilter jwtAuthFilter;
 
-        http
-            .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/Authenticate").permitAll()
-                    .anyRequest().authenticated()
-            );
-           //.httpBasic(Customizer.withDefaults()); // added basic authentication filter , if removed tehn it will remove basic authentication filter
-        http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+	@Bean
+	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        return http.build();
-    }
+		http.csrf(csrf -> csrf.disable()).authorizeHttpRequests(
+				auth -> auth.requestMatchers("/Authenticate").permitAll().anyRequest().authenticated()
+		/*
+		 * How to explain simply:
+		 * 
+		 * /Authenticate 👉 Public endpoint (used for login and generating JWT)
+		 * 
+		 * .anyRequest().authenticated() 👉 Every other endpoint requires a valid JWT
+		 * token
+		 */
+		);
+		// .httpBasic(Customizer.withDefaults()); // added basic authentication filter ,
+		// if removed tehn it will remove basic authentication filter
+		http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
-    // ✅ Password Encoder
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+		return http.build();
+	}
 
-    @Bean
-    public UserDetailsService userDetailsService(CustomUserDetailsService service) {
-        return service;
-    }
+	// ✅ Password Encoder
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
+	@Bean
+	public UserDetailsService userDetailsService(CustomUserDetailsService service) {
+		return service;
+	}
 
-    @Bean
-    public AuthenticationManager authenticationManager(UserDetailsService userDetailsService,
-                                                       PasswordEncoder passwordEncoder){
-        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider(userDetailsService);
-      //  daoAuthenticationProvider.setUserDetailsService(userDetailsService);
-        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
+	@Bean
+	public AuthenticationManager authenticationManager(UserDetailsService userDetailsService,
+			PasswordEncoder passwordEncoder) {
+		DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider(userDetailsService);
+		// daoAuthenticationProvider.setUserDetailsService(userDetailsService);
+		daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
 
-        return new ProviderManager(daoAuthenticationProvider);
-    }
+		return new ProviderManager(daoAuthenticationProvider);
+	}
 }
