@@ -19,6 +19,6 @@ public class EmployeeController {
 	@GetMapping("/getData")
 	public ResponseEntity<List<Employee>> getAllEmployeeDetails(){
 		List<Employee> empList = empService.getAllEmployee();
-		return new ResponseEntity(empList , HttpStatus.FOUND);
+		return new ResponseEntity(empList , HttpStatus.FOUND); //
 	}
 }
