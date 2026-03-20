@@ -32,7 +32,7 @@ public class JWTUtil {
 	    }
 
 	    private Claims extractClaims(String token) {
-	        return Jwts.parserBuilder()
+	        return Jwts.parserBuilder()//jwts.Parser()
 	                .setSigningKey(key)
 	                .build()
 	                .parseClaimsJws(token)
