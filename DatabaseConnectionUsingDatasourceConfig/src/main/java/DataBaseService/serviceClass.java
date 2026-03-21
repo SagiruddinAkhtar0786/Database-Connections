@@ -24,7 +24,7 @@ public class serviceClass {
 				// String sql = ;
 				ResultSet rs = st.executeQuery("Select * from EMPLOYEE")) {
 			while (rs.next()) {
-				System.out.println("Employee :: " + rs.getInt("id") + " - " + rs.getString("EmployeeeName") + " - "
+				System.out.println("Employee ID :: " + rs.getInt("id") + " - " + rs.getString("EmployeeeName") + " - "
 						+ rs.getString("Email"));
 			}
 
