@@ -1,4 +1,4 @@
-package com.database.JpaConnection.Repository;
+ package com.database.JpaConnection.Repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
